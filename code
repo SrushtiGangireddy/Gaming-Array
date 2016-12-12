@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+public class Solution{
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        
+        int num_games=sc.nextInt();
+        
+        for(int i=0;i<num_games;i++){
+            int n=sc.nextInt();
+            int count=0;
+            ArrayList<Long> board=new ArrayList<Long>();
+            long[] game=new long[n];
+            
+            for(int j=0;j<n;j++){
+                game[j]=sc.nextLong();
+                board.add(game[j]);
+            }
+            Collections.sort(board);
+            long max=board.get(board.size()-1);
+            while(board.size() > 0){
+                
+                for(int k=0;k<n;k++){
+                    if(game[k] == max){
+                        while(k<n){
+                            Long temp=game[k];
+                            board.remove(temp);
+                            k=k+1;
+                        }
+                        break;
+                    }
+                }
+                count++;
+                Collections.sort(board);
+                if(board.size() > 1){
+                     max=board.get(board.size()-1);
+                }
+               
+                
+            }
+            
+            
+            if(count % 2 != 0 ){
+                System.out.println("BOB");
+            }else{
+                System.out.println("ANDY");
+            }
+            
+        }
+        
+        
+    }
+}
